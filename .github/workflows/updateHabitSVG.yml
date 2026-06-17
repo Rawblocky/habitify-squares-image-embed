@@ -5,8 +5,11 @@ on:
     - cron: "0 1 * * *"
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
-  update-badge:
+  updateImage:
     runs-on: ubuntu-latest
 
     steps:
