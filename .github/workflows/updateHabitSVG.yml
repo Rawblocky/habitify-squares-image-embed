@@ -1,0 +1,37 @@
+name: Update Habit SVG
+
+on:
+  schedule:
+    - cron: "0 1 * * *"
+  workflow_dispatch:
+
+jobs:
+  update-badge:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install Lune
+        run: |
+          curl -L https://github.com/lune-org/lune/releases/download/v0.10.4/lune-0.10.4-linux-x86_64.zip -o lune.zip
+          unzip lune.zip
+          chmod +x lune
+          sudo mv lune /usr/local/bin/lune
+
+      - name: Verify Lune
+        run: lune --version
+
+      - name: Run habit script
+        env:
+          HABITIFY_API_KEY: ${{ secrets.HABITIFY_API_KEY }}
+        run: lune run scripts/updateImage.luau
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add output.svg
+          git diff --staged --quiet || git commit -m "chore: update svg"
+          git push

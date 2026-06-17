@@ -1,0 +1,50 @@
+{
+	"habits": [
+		{
+			"name": "Exercise",
+			"displayName": "🏃‍♂️ Time Exercising",
+			"colors": [
+				{
+					"color": "#023A16",
+					"minValue": 1200
+				},
+				{
+					"color": "#17632A",
+					"minValue": 2400
+				},
+				{
+					"color": "#2DA042",
+					"minValue": 4800
+				},
+				{
+					"color": "#56D364",
+					"minValue": 7200
+				}
+			]
+		},
+		{
+			"name": "Daylight (20mins)",
+			"displayName": "☀️ Time in Sunlight",
+			"colors": [
+				{
+					"color": "#51310d",
+					"minValue": 1200
+				},
+				{
+					"color": "#875015",
+					"minValue": 3600
+				},
+				{
+					"color": "#c57a29",
+					"minValue": 7200
+				},
+				{
+					"color": "#E0861D",
+					"minValue": 10800
+				}
+			]
+		}
+	],
+	"maxDays": 365,
+	"fillUpMissingDays": true
+}
