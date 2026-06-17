@@ -11,8 +11,9 @@ if not apiKey then
 	apiKey = string.split(string.sub(fs.readFile(".env"), 18), "\n")[1]
 end
 
+local cacheDirExists = table.find(fs.readDir("/"), "cache")
 local function request(url: string, cacheName: string)
-	if cacheName and table.find(fs.readDir("/"), "cache") then
+	if cacheName and cacheDirExists then
 		local cacheDir = fs.readDir("cache")
 		if table.find(cacheDir, cacheName .. ".json") then
 			return serde.decode("json", fs.readFile(`cache/{cacheName}.json`))
@@ -32,7 +33,7 @@ local function request(url: string, cacheName: string)
 
 	local decoded = serde.decode("json", response.body)
 
-	if cacheName then
+	if cacheName and cacheDirExists then
 		fs.writeFile(`cache/{cacheName}.json`, serde.encode("json", decoded))
 	end
 
