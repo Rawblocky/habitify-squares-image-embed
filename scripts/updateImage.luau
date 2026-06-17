@@ -12,7 +12,7 @@ if not apiKey then
 end
 
 local function request(url: string, cacheName: string)
-	if cacheName then
+	if cacheName and table.find(fs.readDir("/"), "cache") then
 		local cacheDir = fs.readDir("cache")
 		if table.find(cacheDir, cacheName .. ".json") then
 			return serde.decode("json", fs.readFile(`cache/{cacheName}.json`))
